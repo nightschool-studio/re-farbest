@@ -2,7 +2,7 @@
 
 /*
     Theme Name: Farbest 2023 Theme
-    Theme URI: 
+    Theme URI:
     Author: Magalie Chetrit
     Author URI: https://magaliechetrit.com
     Description: Child Theme of Storefront
@@ -13,6 +13,11 @@
     License URI: #
     Template: storefront
 */
+
+:root {
+    --farbest-brand-green       : #517527;
+    --farbest-brand-green-light : #5f9732;
+}
 
 /* woocommerce styling*/
 ul.products li.product {
@@ -27,4 +32,45 @@ ul.products li.product .woocommerce-loop-product__title {
 }
 .site-main ul.products.columns-1 li.product {
 	border-bottom: 1px dashed #333;
+}
+body,
+button,
+input,
+select,
+textarea {
+    color: #333;
+    padding: 0;
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 100;
+}
+
+a {
+    color: var(--farbest-brand-green);
+}
+
+a:visited {
+    color: var(--farbest-brand-green-light);
+}
+
+a:hover {
+    color: var(--farbest-brand-green-light);
+}
+
+a:active {
+    color: var(--farbest-brand-green-light);
+}
+
+a:focus {
+    outline: 0;
+}
+
+a:hover,
+a:active {
+    outline: 0;
+}
+
+a {
+    text-decoration: none;
 }
