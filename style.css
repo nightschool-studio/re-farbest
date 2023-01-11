@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+/*
+    Theme Name: Farbest 2023 Theme
+    Theme URI: 
+    Author: Magalie Chetrit
+    Author URI: https://magaliechetrit.com
+    Description: Child Theme of Storefront
+    Text Domain: storefront
+    Domain Path: /languages/
+    Version: 0.0.1
+    License: No License
+    License URI: #
+    Template: storefront
+*/
+
+/* woocommerce styling*/
+ul.products li.product {
+	text-align:left;
+}
+ul.products li.product .woocommerce-loop-product__title {
+	font-size:1.3rem;
+	color:#6a8c3d;
+}
+.custom-short-description, ul.products li.product .woocommerce-LoopProduct-link {
+	color: #333;
+}
+.site-main ul.products.columns-1 li.product {
+	border-bottom: 1px dashed #333;
+}
