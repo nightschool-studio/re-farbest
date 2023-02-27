@@ -5,13 +5,13 @@
     Theme URI:
     Author: Magalie Chetrit
     Author URI: https://magaliechetrit.com
-    Description: Child Theme of Storefront
-    Text Domain: storefront
+    Description: Child Theme of Kadence
+    Template: kadence
+    Text Domain: kadence
     Domain Path: /languages/
     Version: 0.0.1
     License: No License
     License URI: #
-    Template: storefront
 */
 
 :root {
@@ -73,4 +73,19 @@ a:active {
 
 a {
     text-decoration: none;
+}
+
+/* Unset Woo and Kadence CSS */
+.woocommerce div.product div.summary, .woocommerce #content div.product div.summary, .woocommerce-page div.product div.summary, .woocommerce-page #content div.product div.summary {
+
+    float: none;
+    width: 100%;
+}
+
+.woocommerce ul.products li.product a.woocommerce-loop-image-link {
+    display: none;
+}
+
+.woocommerce ul.products.products-list-view li.product {
+    display: initial;
 }
