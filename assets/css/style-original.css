@@ -1671,14 +1671,6 @@ h4.wh {
     text-transform: uppercase;
 }
 
-#custom-image {
-    text-align: center;
-    background-image: url(images/Map-farbest-ghost.png);
-    background-size: cover;
-    background-position: center bottom;
-    width: 100%;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
-}
 
 #offerings .threeWide,
 #row-wrapper .threeWide {
@@ -1903,7 +1895,7 @@ h4.partner-title {
     /*background: -webkit-linear-gradient(
         rgba(255, 255, 255, 0) 0%,
         rgba(255, 255, 255, 1) 100%
-    ); 
+    );
     background-image: -moz-linear-gradient(
         rgba(255, 255, 255, 0) 0%,
         rgba(255, 255, 255, 1) 100%
@@ -2543,20 +2535,6 @@ div.locationWrapper {
         margin: 0 35px;
         text-align: left;
         width: inherit;
-    }
-
-    #custom-image {
-        background-image: none !important;
-        background-color: #b5be01;
-    }
-
-    #custom-image img {
-        display: none !important;
-    }
-
-    #custom-image h2 {
-        color: #fff;
-        font-size: 1.8em;
     }
 
     .custImgWh,

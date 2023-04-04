@@ -75,9 +75,60 @@ a {
     text-decoration: none;
 }
 
-/* Unset Woo and Kadence CSS */
-.woocommerce div.product div.summary, .woocommerce #content div.product div.summary, .woocommerce-page div.product div.summary, .woocommerce-page #content div.product div.summary {
+.content-container {
+    max-width: 1200px;
+    padding:  40px 35px;
+    margin: auto;
+}
 
+.flex {
+    display: flex;
+}
+.grid {
+    display: grid;
+}
+
+.col-3 {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5%;
+}
+
+
+/* titles */
+.page-hero h1 {
+    font-size: 1.8em;
+    max-width: 1200px;
+    margin: auto;
+}
+h2 {
+    font-size: 1.43em;
+    font-weight: 300;
+    margin-top: 80px;
+}
+
+h2.page-title {
+    text-align: center;
+}
+
+
+/* page warehousing */
+.page-hero {
+    min-height: 400px;
+    display: flex;
+    margin: auto;
+}
+.icon-pin {
+    width: 25px;
+    height: auto;
+}
+.card-top h4 {
+    margin-left: 12px;
+}
+/* Unset Woo and Kadence CSS */
+.woocommerce div.product div.summary,
+.woocommerce #content div.product div.summary,
+.woocommerce-page div.product div.summary,
+.woocommerce-page #content div.product div.summary {
     float: none;
     width: 100%;
 }
@@ -88,4 +139,42 @@ a {
 
 .woocommerce ul.products.products-list-view li.product {
     display: initial;
+}
+
+.farbest-btn svg {
+	height: 15px;
+	width: 20px;
+	display: inline-block;
+	margin-right: 4px;
+}
+.farbest-btn svg path {
+	fill: rgb(106, 140, 61);
+}
+
+
+.custom-image {
+    text-align: center;
+    background-image: url(images/Map-farbest-ghost.png);
+    background-size: cover;
+    background-position: center bottom;
+    width: 100%;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+}
+
+@media screen and (max-width:750px) {
+
+    .custom-image {
+        background-image: none !important;
+        background-color: #b5be01;
+    }
+
+    .custom-image img {
+        display: none !important;
+    }
+
+    .custom-image h2 {
+        color: #fff;
+        font-size: 1.8em;
+    }
+
 }
