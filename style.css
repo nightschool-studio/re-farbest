@@ -5,9 +5,9 @@
     Theme URI:
     Author: Magalie Chetrit
     Author URI: https://magaliechetrit.com
-    Description: Child Theme of Kadence
-    Template: kadence
-    Text Domain: kadence
+    Description: Child Theme of Storefront
+    Template: storefront
+    Text Domain: farbest-2023
     Domain Path: /languages/
     Version: 0.0.1
     License: No License
@@ -161,7 +161,49 @@ h2.page-title {
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
 }
 
-@media screen and (max-width:750px) {
+.col-full.sidebar-left {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+/* Product Archive */
+h1.woocommerce-products-header__title.page-title {
+    margin-top: 0;
+}
+.product-read-more {
+    display: block;
+}
+.tabs.wc-tabs {
+    display: none;
+}
+.woocommerce-tabs .panel h2:first-of-type {
+    position: relative;
+    border-bottom: 1px solid rgba(0,0,0,.05);
+    text-align: center;
+    font-size: 20px;
+    font-weight: 800;
+}
+.woocommerce-tabs .panel h2:after {
+    content: '';
+    display: block;
+    height: 3px;
+    background-color: var(--farbest-brand-green-light);
+    width: 220px;
+    position: absolute;
+    left: calc(50% - 100px );
+}
+
+@media screen and (min-width: 768px) {
+    .col-full.sidebar-left .content-area {
+        margin-right: 0;
+        margin-left: 4.347826087%;
+    }
+    .woocommerce-tabs .panel {
+        width: 100%;
+        float: none;
+    }
+}
+@media screen and (max-width: 768px) {
 
     .custom-image {
         background-image: none !important;
@@ -175,6 +217,9 @@ h2.page-title {
     .custom-image h2 {
         color: #fff;
         font-size: 1.8em;
+    }   
+    .grid {
+        display: block;
     }
 
 }

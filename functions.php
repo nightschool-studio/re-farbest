@@ -29,49 +29,29 @@ function remove_actions() {
     remove_action( 'woocommerce_before_single_product_summary', 'woocommerce_show_product_images', 20 );
     remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 5 );
     remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10 );
-    remove_action( 'woocommerce_product_additional_information', 'wc_display_product_attributes', 10 );
-
-    // KADENCE ACTIONS
-    if ( class_exists( 'Kadence\Theme' ) ) {
-        $kadence_theme_class = Kadence\Theme::instance();
-        remove_action( 'woocommerce_before_shop_loop_item_title', array( $kadence_theme_class->components['woocommerce'], 'archive_loop_second_image' ), 30 );
-        remove_action( 'woocommerce_after_shop_loop_item_title', array( $kadence_theme_class->components['woocommerce'], 'archive_excerpt' ), 20 );
-    }
+    // remove_action( 'woocommerce_product_additional_information', 'wc_display_product_attributes', 10 );
 
 }
 
 function add_actions() {
     add_action( 'wp_enqueue_scripts', 'farbest_child_theme_enqueue_style' );
-    add_action( 'woocommerce_after_shop_loop_item_title', 'farbest_product_read_more', 20 );
 	add_action( 'woocommerce_single_product_summary', 'ta_the_content', 28 );
-    add_action( 'woocommerce_product_additional_information', 'wc_display_product_attributes_with_pipe', 10 );
+    add_action( 'woocommerce_after_shop_loop_item_title', 'wc_add_long_description', 40 );
 }
 
 function add_filters() {
+    add_filter('excerpt_more', 'new_excerpt_more');
     add_filter('body_class', 'sidebar_template_class');
     add_filter( 'woocommerce_product_tabs', 'woo_remove_product_tabs', 98 );
+    // add_filter( 'woocommerce_attribute', 'replace_comma_by_pipe' );
+
 }
 
-// farbest_goto_single_product
-function farbest_product_read_more() {
-    if ( is_main_query() && is_archive() ) {
-    $columns = wc_get_loop_prop( 'columns' );
-    if ( 1 === $columns || kadence()->option( 'product_archive_toggle' ) ) {
-        global $post;
-        echo '<div class="product-excerpt" itemprop="description">';
-        if ( $post->post_excerpt ) {
-			$content = get_the_content();
-            echo wp_kses_post( apply_filters( 'archive_woocommerce_short_description', $post->post_excerpt ) ); // phpcs:ignore WPThemeReview.CoreFunctionality.PrefixAllGlobals.NonPrefixedHooknameFound
-			if (strlen($content) > 200) {
-				echo substr( apply_filters( 'the_content', $post->post_content ), 0,190 ) . '...';
-			}
-			else {
-				echo apply_filters('the_content', $content);
-			}
-        } ?>
-            <a style="color:#6d6d6d; display: block;" href="<?php the_permalink(); ?>" class="farbest-btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. --><path d="M0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM294.6 135.1l99.9 107.1c3.5 3.8 5.5 8.7 5.5 13.8s-2 10.1-5.5 13.8L294.6 376.9c-4.2 4.5-10.1 7.1-16.3 7.1C266 384 256 374 256 361.7l0-57.7-96 0c-17.7 0-32-14.3-32-32l0-32c0-17.7 14.3-32 32-32l96 0 0-57.7c0-12.3 10-22.3 22.3-22.3c6.2 0 12.1 2.6 16.3 7.1z"/></svg></i>Product Details</a></div>
-        <?php }
-    }
+
+// Replaces the excerpt "more" text by a link
+function new_excerpt_more($more) {
+    global $post;
+	return '<div style="text-align:center"><a class="moretag" style="color:#5f9732;" href="'. get_permalink($post->ID) . '"> [... more]</a></div>';
 }
 
 function wc_add_long_description() {
@@ -81,8 +61,9 @@ function wc_add_long_description() {
             <?php
             $content = get_the_content();
 			if (strlen($content) > 200) {echo substr( apply_filters( 'the_content', $product->post->post_content ), 0,190 ) . '...';} else {echo apply_filters('the_content', $content);} ?>
-			<p style="color:#6d6d6d;"><i class="fas fa-arrow-circle-right" style="color:#6a8c3d;"></i> product details</p>
-        </div> <?php
+        </div>
+        <a class="product-read-more" style="color:#6d6d6d;" href="<?php echo get_permalink($product->ID); ?>"><i class="fas fa-arrow-circle-right" style="color:#6a8c3d;"></i> product details</a>
+        <?php
 
 }
 
@@ -112,7 +93,8 @@ function sidebar_template_class($classes){
 function woo_remove_product_tabs( $tabs ) {
     unset( $tabs['description'] );          // Remove the description tab
     unset( $tabs['reviews'] );          // Remove the reviews tab
-    //unset( $tabs['additional_information'] );     // Remove the additional information tab
+    // unset( $tabs['additional_information'] );  	// Remove the additional information tab
+    $tabs['additional_information']['title'] = __( 'Product Details' );
     return $tabs;
 }
 // Woocommerce move description on single product page to below excerpt //
@@ -121,6 +103,14 @@ function ta_the_content() {
         echo the_content();
 }
 
+
+
+// replace comma with pipe
+function replace_comma_by_pipe() {
+    global $product;
+    $values = array_filter( $product->get_attributes(), 'wc_attributes_array_filter_visible' );
+    return wpautop( wptexturize( implode( '| ', $values ) ) );
+}
 /***
  * ACF CUSTOMIZATION
  */
